@@ -12,7 +12,7 @@ import { AuthContext,FirebaseContext } from '../../Contexts/Context'
 import { useHistory } from 'react-router-dom';
 function Header() {
   // contexts
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext) 
   const {firebase} = useContext(FirebaseContext)
   // hooks
   const history = useHistory() 

@@ -1,4 +1,4 @@
-import React,{useEffect,useContext} from 'react';
+import React, { useEffect, useContext } from 'react';
 import './App.css';
 
 // import packages
@@ -14,37 +14,40 @@ import Create from './Pages/Create'
 import ViewPost from './Pages/ViewPost';
 
 // import contexts
-import {AuthContext,FirebaseContext} from './Contexts/Context' 
+import { AuthContext, FirebaseContext } from './Contexts/Context'
+import Post from './Contexts/Post';
 
 function App() {
-  const {user,setUser} = useContext(AuthContext) 
-  const {firebase} = useContext(FirebaseContext) 
-  useEffect(()=>{
+  const { user, setUser } = useContext(AuthContext)
+  const { firebase } = useContext(FirebaseContext)
+  useEffect(() => {
     // console.log(user)
-    firebase.auth().onAuthStateChanged((userCredential)=>{
-      setUser(userCredential) 
+    firebase.auth().onAuthStateChanged((userCredential) => {
+      setUser(userCredential)
     })
 
-  },[])
+  }, [])
   return (
     <div>
-      <Router>
-        <Route exact path='/'>
-          <Home />
-        </Route>
-        <Route path='/signup'>
-          <Signup />
-        </Route>
-        <Route path='/login'>
-          <Login /> 
-        </Route>
-        <Route path='/sell'>
-          <Create /> 
-        </Route>
-        <Route path='/singleProduct'>
-          <ViewPost/> 
-        </Route>
-      </Router>
+      <Post>
+        <Router>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route path='/signup'>
+            <Signup />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
+          <Route path='/sell'>
+            <Create />
+          </Route>
+          <Route path='/singleProduct'>
+            <ViewPost />
+          </Route>
+        </Router>
+      </Post>
     </div>
   );
 }

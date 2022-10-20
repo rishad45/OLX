@@ -3,14 +3,18 @@ import React, { useContext, useEffect, useState } from 'react';
 import Heart from '../../assets/Heart';
 import './Post.css';
 import { FirebaseContext } from '../../Contexts/Context'
+import { PostContext } from '../../Contexts/Post';
+import { useHistory } from 'react-router-dom';
 function Posts() {
 
   // contexts
   const { firebase } = useContext(FirebaseContext)
+  const { setPost } = useContext(PostContext)    
 
   // useState hooks
   const [Products, setProducts] = useState([])
   let allProducts
+  const history = useHistory()
   // Querying For Products
   useEffect(() => {
     firebase.firestore().collection('Products').get().then(async (snapshot) => {
@@ -34,12 +38,17 @@ function Posts() {
           <span>Quick Menu</span>
           <span>View more</span>
         </div>
-        <div className="cards" > 
+        <div className="cards"> 
           {/* dynamic */}
           {
             Products.map((i) => {
               return <div
                 className="card"
+                onClick={()=>{
+                    console.log(i) 
+                    setPost(i) 
+                    history.push('/singleProduct') 
+                }}
               >
                 <div className="favorite">
                   <Heart></Heart>

@@ -12,18 +12,18 @@ function Banner() {
             <Arrow></Arrow> 
           </div>
           <div className="otherQuickOptions">
-            <span>Cars</span>
-            <span>Motorcy...</span>
-            <span>Mobile Ph...</span>
-            <span>For Sale:Houses & Apart...</span>
-            <span>Scoot...</span>
-            <span>Commercial & Other Ve...</span>
-            <span>For Rent: House & Apart...</span>
+            <span className='link'>Cars</span>
+            <span className='link'>Motorcy...</span>
+            <span className='link'>Mobile Ph...</span>
+            <span className='link'>For Sale:Houses & Apart...</span>
+            <span className='link'>Scoot...</span>
+            <span className='link'>Commercial & Other Ve...</span>
+            <span className='link'>For Rent: House & Apart...</span>
           </div>
         </div>
         <div className="banner">
           <img
-            src="../../../Images/banner copy.png"
+            src="../../../Images/banner copy.png" 
             alt=""
           />
         </div>

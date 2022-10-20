@@ -162,3 +162,8 @@
     display: none;
   }
 }
+
+/* my styles */
+.link{
+  cursor: pointer;
+}

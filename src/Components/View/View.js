@@ -1,7 +1,8 @@
 import React from 'react';
 
 import './View.css';
-function View() {
+function View() { 
+  
   return (
     <div className="viewParentDiv">
       <div className="imageShowDiv">

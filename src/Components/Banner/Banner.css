@@ -38,3 +38,7 @@
     position: relative;
   }
 }
+
+.list{
+  cursor: pointer;
+}

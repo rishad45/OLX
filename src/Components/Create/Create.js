@@ -3,6 +3,7 @@ import './Create.css';
 import Header from '../Header/Header';
 import {AuthContext,FirebaseContext} from '../../Contexts/Context' 
 import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Create = () => {
   // contexts
@@ -36,7 +37,14 @@ const Create = () => {
 
   // submitting the file 
   const submitForm = ()=>{
-    const date = new Date() 
+    if(formDetails.category==='' || formDetails.image === '' || formDetails.name === '' || formDetails.price === ''){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Empty Fields', 
+      })
+    }else{
+      const date = new Date() 
     firebase.storage().ref(`/Images/${Date.now()+formDetails.image.name}`).put(formDetails.image).then(({ref})=>{  
       ref.getDownloadURL().then((url)=>{ 
         console.log(url) 
@@ -52,6 +60,7 @@ const Create = () => {
       })
     })
     history.push('/')
+    }
   }
 
   return (

@@ -85,3 +85,10 @@
   font-size: 24px;
   color: #002f34;
 }
+#productName{
+  color: blue;
+}
+#catname{
+  color: #0d0d0ddd;
+  font-weight: 900;
+}

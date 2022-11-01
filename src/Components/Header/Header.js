@@ -10,7 +10,7 @@ import SellButtonPlus from '../../assets/SellButtonPlus';
 // import context
 import { AuthContext,FirebaseContext } from '../../Contexts/Context'
 import { useHistory } from 'react-router-dom';
-function Header() {
+function Header() { 
   // contexts
   const { user } = useContext(AuthContext) 
   const {firebase} = useContext(FirebaseContext)

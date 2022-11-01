@@ -15,7 +15,7 @@ import ViewPost from './Pages/ViewPost';
 
 // import contexts
 import { AuthContext, FirebaseContext } from './Contexts/Context'
-import Post from './Contexts/Post';
+import Post from './Contexts/Post';   
 
 function App() {
   const { user, setUser } = useContext(AuthContext)
@@ -29,8 +29,8 @@ function App() {
   }, [])
   return (
     <div>
-      <Post>
-        <Router>
+      <Post>  
+        <Router> 
           <Route exact path='/'>
             <Home />
           </Route>
@@ -44,7 +44,7 @@ function App() {
             <Create />
           </Route>
           <Route path='/singleProduct'>
-            <ViewPost />
+            <ViewPost />  
           </Route>
         </Router>
       </Post>

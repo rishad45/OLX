@@ -3,16 +3,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import './View.css';
 import { PostContext } from '../../Contexts/Post';
 import { FirebaseContext } from '../../Contexts/Context'
-function View() {
+function View() { 
   // states
-  const [userDetails, setUserDetails] = useState()
+  const [userDetails, setUserDetails] = useState() 
   // contexts
-  const { post } = useContext(PostContext)
+  const { post } = useContext(PostContext) 
   const { firebase } = useContext(FirebaseContext)
   useEffect(() => {
     firebase.firestore().collection('Users').where('id', '==', post.userId).get().then(async (snapshot) => {
       snapshot.forEach(doc => {
-         setUserDetails(doc.data()) 
+         setUserDetails(doc.data())  
       })
 
     })

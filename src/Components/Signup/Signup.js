@@ -1,10 +1,10 @@
-import React, { useState, useContext} from 'react';
-
+import React, { useState, useContext } from 'react';
+import Swal from 'sweetalert2';
 import Logo from '../../olx-logo.png';
 import './Signup.css';
 
-import {FirebaseContext} from '../../Contexts/Context' 
-import { useHistory } from 'react-router-dom';
+import { FirebaseContext } from '../../Contexts/Context'
+import { useHistory,Link } from 'react-router-dom';
 
 // ..........MAIN FUNCTION.........
 export default function Signup() {
@@ -20,29 +20,37 @@ export default function Signup() {
   const history = useHistory()
 
   // firebase destructuring
-  const {firebase} = useContext(FirebaseContext)
+  const { firebase } = useContext(FirebaseContext)
 
   // function for handling the form submission 
   const handleFormSubmit = (e) => {
-    e.preventDefault() 
-    firebase.auth().createUserWithEmailAndPassword(state.email,state.password).then((result)=>{
-      result.user.updateProfile({displayName:state.username}).then(()=>{
-        firebase.firestore().collection('Users').add({
-          id: result.user.uid,
-          username : state.username,
-          phone:state.phone,
-        }).then(()=>{
-          history.push('/login') 
+    e.preventDefault()
+    if (state.email === '' || state.password === '' || state.phone === '' || state.username === '') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Input fields cannot be empty',
+      })
+    } else {
+      firebase.auth().createUserWithEmailAndPassword(state.email, state.password).then((result) => {
+        result.user.updateProfile({ displayName: state.username }).then(() => {
+          firebase.firestore().collection('Users').add({
+            id: result.user.uid,
+            username: state.username,
+            phone: state.phone,
+          }).then(() => {
+            history.push('/login')
+          })
         })
       })
-    })
+    }
   }
 
   // function for handling input change
   const handleChange = (e) => {
-    const name = e.target.name 
+    const name = e.target.name
     const value = e.target.value 
-    setState({...state, [name]: value}) 
+    setState({ ...state, [name]: value })
   }
   // destructuring state
   // const { username, email, phone, password } = FormData
@@ -85,7 +93,7 @@ export default function Signup() {
             onChange={handleChange}
           />
           <br />
-          <label htmlFor="password">Password</label> 
+          <label htmlFor="password">Password</label>
           <br />
           <input
             className="input"
@@ -99,7 +107,8 @@ export default function Signup() {
           <br />
           <button type='submit'>Signup</button>
         </form>
-        <a>Login</a>
+        {/* <a>Login</a> */}
+        <Link to='/login'>Log In</Link>
       </div>
     </div>
   );

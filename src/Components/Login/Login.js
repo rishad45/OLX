@@ -1,14 +1,16 @@
 import React, { useContext, useState } from 'react';
-
+import Swal from 'sweetalert2';
 import Logo from '../../olx-logo.png';
 import './Login.css';
+
+import {Link} from 'react-router-dom'
 
 // importing firebase context
 import {FirebaseContext} from '../../Contexts/Context'
 import { useHistory } from 'react-router-dom'; 
 
 // MAIN FUNCTION
-function Login() { 
+function Login() {
   // firebase
   const {firebase} = useContext(FirebaseContext) 
 
@@ -32,13 +34,25 @@ function Login() {
   // handle for submission
   const handleFormSubmit = (e)=>{
     e.preventDefault()  
-    firebase.auth().signInWithEmailAndPassword(state.email,state.password).then((userCredential)=>{
-      // signed In
-      // const user = userCredential.user
-      history.push('/') 
-    }).catch((error)=>{ 
-      window.alert(`error caused!!!! errorId: ${error.code} message: ${error.message}`) 
-    })
+    if(state.email === '' || state.password == ''){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Input fields cannot be empty!',
+      })
+    }else{  
+      firebase.auth().signInWithEmailAndPassword(state.email,state.password).then((userCredential)=>{
+        // signed In
+        // const user = userCredential.user
+        history.push('/') 
+      }).catch((error)=>{ 
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${error.message}`,
+        })
+      })
+    }
   }
 
   return (
@@ -73,7 +87,7 @@ function Login() {
           <br />
           <button type='submit'>Login</button> 
         </form>
-        <a>Signup</a>
+        <Link to='/signup'>Sign Up</Link>
       </div>
     </div>
   );
